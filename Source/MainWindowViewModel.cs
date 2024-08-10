@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 
@@ -7,14 +8,43 @@ using CommunityToolkit.Mvvm.Input;
 
 using HelixToolkit.Wpf;
 
-namespace WpfApp1;
+namespace Rayfer.DiceRoller.WPF;
+
 public partial class MainWindowViewModel : ObservableObject
 {
-    Dictionary<int, (double angleX, double angleY, double angleZ)> FaceRotations = new()
+    private readonly ModelImporter modelImporter;
+    private readonly Dictionary<DiceFaces, Dictionary<int, (double angleX, double angleY, double angleZ)>> diceModelFaceRotationsDictionary;
+
+    private readonly Dictionary<DiceFaces, string> diceModelDictionary = new()
+    {
+        { DiceFaces.D4, "Resources\\D4.obj" },
+        { DiceFaces.D10, "Resources\\D10.obj" },
+    };
+
+    private readonly Dictionary<DiceFaces, int> diceFacesNumberDictionary = new()
+    {
+        { DiceFaces.D4, 5 },
+        { DiceFaces.D6, 7 },
+        { DiceFaces.D8, 9 },
+        { DiceFaces.D10, 11 },
+        { DiceFaces.D12, 13 },
+        { DiceFaces.D20, 21 },
+    };
+
+
+    private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d4FaceRotationsDictionary = new()
+    {
+        { 1, (-60, 95, 15) },
+        { 2, (-5, -20, 60) },
+        { 3, (180, 40, 15) },
+        { 4, (60, 25, -10) }
+    };
+
+    private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d10FaceRotationsDictionary = new()
     {
         { 1, (-180, 160, -4) },
         { 2, (-8, 120, 4) },
-        { 3, (-170, 90, 40) },
+        { 3, (-170, 90, 20) },
         { 4, (7, 30, 0) },
         { 5, (-180, 30, 8) },
         { 6, (-5, 20, 40) },
@@ -24,15 +54,17 @@ public partial class MainWindowViewModel : ObservableObject
         { 10, (-5, -170, 0) },
     };
 
-    Dictionary<int, double> DiceAngleVariability = new()
+    private readonly Dictionary<DiceFaces, double> diceAngleVariability = new()
     {
-        { 4, 50 },
-        { 6, 40 },
-        { 8, 30 },
-        { 10, 20 },
-        { 12, 15 },
-        { 20, 10 },
+        { DiceFaces.D4, 15 },
+        { DiceFaces.D6, 40 },
+        { DiceFaces.D8, 30 },
+        { DiceFaces.D10, 20 },
+        { DiceFaces.D12, 15 },
+        { DiceFaces.D20, 10 },
     };
+
+    private Model3D diceModel;
 
     [ObservableProperty]
     private double angleX;
@@ -43,20 +75,32 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private double angleZ;
 
+    public Model3D DiceModel
+    {
+        get
+        {
+            return this.diceModel = this.modelImporter.Load(this.diceModelDictionary[this.SelectedDice]);
+        }
+    }
+
     [ObservableProperty]
-    private Model3D diceModel;
+    [NotifyPropertyChangedFor("DiceModel")]
+    private DiceFaces selectedDice;
+
+    [ObservableProperty]
+    private ObservableCollection<DiceFaces> diceTypes;
 
     [RelayCommand]
     private void RollDice()
     {
         var rand = new Random();
-        var xRotationStart = rand.Next(-720, -180);
-        var yRotationStart = rand.Next(-720, -180);
-        var zRotationStart = rand.Next(-720, -180);
+        var xRotationStart = rand.Next(-720, -270);
+        var yRotationStart = rand.Next(-720, -270);
+        var zRotationStart = rand.Next(-720, -270);
 
-        var rolledNumber = 5;
-        var diceFaceOrientation = FaceRotations[rolledNumber];
-        var diceOrientationVariability = DiceAngleVariability[10];
+        var rolledNumber = Random.Shared.Next(1, diceFacesNumberDictionary[this.SelectedDice]);
+        var diceFaceOrientation = diceModelFaceRotationsDictionary[this.SelectedDice][rolledNumber];
+        var diceOrientationVariability = diceAngleVariability[this.SelectedDice];
 
         var diceRollStoryboard = (Storyboard)Application.Current.MainWindow.FindResource("DiceRollStoryboard");
         var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
@@ -76,7 +120,13 @@ public partial class MainWindowViewModel : ObservableObject
 
     public MainWindowViewModel()
     {
-        var importer = new ModelImporter();
-        this.DiceModel = importer.Load(@"Resources\D10.obj");
+        this.modelImporter = new ModelImporter();
+        this.diceTypes = [DiceFaces.D4, DiceFaces.D10];
+        this.SelectedDice = DiceFaces.D4;
+        this.diceModelFaceRotationsDictionary = new()
+        {
+            {DiceFaces.D4, d4FaceRotationsDictionary },
+            {DiceFaces.D10, d10FaceRotationsDictionary },
+        };
     }
 }

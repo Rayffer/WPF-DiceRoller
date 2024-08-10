@@ -48,11 +48,12 @@
         <Grid>
             <h:HelixViewport3D IsManipulationEnabled="False"
                                IsPanEnabled="False"
+                               IsRotationEnabled="False"
                                ShowViewCube="False">
                 <!-- Camera Setup -->
                 <h:HelixViewport3D.Camera>
                     <PerspectiveCamera x:Name="DiceCamera" 
-                                       Position="3,6,5"
+                                       Position="3,3,5"
                                        LookDirection="-3,-3,-5" />
                 </h:HelixViewport3D.Camera>
                 <ModelVisual3D>

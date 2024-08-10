@@ -19,6 +19,7 @@ public partial class MainWindowViewModel : ObservableObject
     {
         { DiceFaces.D4, "Resources\\D4.obj" },
         { DiceFaces.D6, "Resources\\D6.obj" },
+        { DiceFaces.D8, "Resources\\D8.obj" },
         { DiceFaces.D10, "Resources\\D10.obj" },
     };
 
@@ -50,6 +51,18 @@ public partial class MainWindowViewModel : ObservableObject
         { 6, (-40, -45, -90) }
     };
 
+    private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d8FaceRotationsDictionary = new()
+    {
+        { 1, (20, -15, -15) },
+        { 2, (165, 168, -15) },
+        { 3, (50, 70, 40) },
+        { 4, (175, -115, -18) },
+        { 5, (-22, -190, -20) },
+        { 6, (190, -20, -20) },
+        { 7, (-4, -115, -20) },
+        { 8, (200, 75, 0) }
+    };
+
     private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d10FaceRotationsDictionary = new()
     {
         { 1, (-180, 160, -4) },
@@ -68,7 +81,7 @@ public partial class MainWindowViewModel : ObservableObject
     {
         { DiceFaces.D4, 15 },
         { DiceFaces.D6, 20 },
-        { DiceFaces.D8, 30 },
+        { DiceFaces.D8, 15 },
         { DiceFaces.D10, 20 },
         { DiceFaces.D12, 15 },
         { DiceFaces.D20, 10 },
@@ -130,12 +143,13 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel()
     {
         this.modelImporter = new ModelImporter();
-        this.diceTypes = [DiceFaces.D4, DiceFaces.D6, DiceFaces.D10];
+        this.diceTypes = [DiceFaces.D4, DiceFaces.D6, DiceFaces.D8, DiceFaces.D10];
         this.SelectedDice = DiceFaces.D4;
         this.diceModelFaceRotationsDictionary = new()
         {
             {DiceFaces.D4, d4FaceRotationsDictionary },
             {DiceFaces.D6, d6FaceRotationsDictionary },
+            {DiceFaces.D8, d8FaceRotationsDictionary },
             {DiceFaces.D10, d10FaceRotationsDictionary },
         };
     }

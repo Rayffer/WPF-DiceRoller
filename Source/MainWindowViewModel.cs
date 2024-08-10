@@ -103,28 +103,27 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void RollDice()
     {
-        var rand = new Random();
-        var xRotationStart = rand.Next(-720, -270);
-        var yRotationStart = rand.Next(-720, -270);
-        var zRotationStart = rand.Next(-720, -270);
-
         var rolledNumber = Random.Shared.Next(1, diceFacesNumberDictionary[this.SelectedDice]);
         var diceFaceOrientation = diceModelFaceRotationsDictionary[this.SelectedDice][rolledNumber];
         var diceOrientationVariability = diceAngleVariability[this.SelectedDice];
 
         var diceRollStoryboard = (Storyboard)Application.Current.MainWindow.FindResource("DiceRollStoryboard");
         var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
-        rotationX.From = xRotationStart;
+        rotationX.From = Random.Shared.Next(-720, -270);
         rotationX.To = diceFaceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * diceOrientationVariability;
         rotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
         var rotationY = diceRollStoryboard.Children[1] as DoubleAnimation;
-        rotationY.From = yRotationStart;
+        rotationY.From = Random.Shared.Next(-720, -270);
         rotationY.To = diceFaceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * diceOrientationVariability;
         rotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
         var rotationZ = diceRollStoryboard.Children[2] as DoubleAnimation;
-        rotationZ.From = zRotationStart;
+        rotationZ.From = Random.Shared.Next(-720, -270);
         rotationZ.To = diceFaceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * diceOrientationVariability;
         rotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
+        var cameraPoint = diceRollStoryboard.Children[3] as Point3DAnimation;
+        var yStartingPosition = Random.Shared.Next(-2, 0) * Random.Shared.NextDouble();
+        cameraPoint.From = new Point3D(3, yStartingPosition, 5);
+
         diceRollStoryboard.Begin();
     }
 

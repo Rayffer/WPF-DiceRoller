@@ -1,0 +1,13 @@
+# Blender 4.2.0 MTL File: 'D4.blend'
+# www.blender.org
+
+newmtl d4
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
+map_Kd C:/Users/Oscar Guillamon/Downloads/dice-wooden/textures/d4_Base_color.png
+map_Bump -bm 1.000000 C:/Users/Oscar Guillamon/Downloads/dice-wooden/textures/d4_Normal_OpenGL.png

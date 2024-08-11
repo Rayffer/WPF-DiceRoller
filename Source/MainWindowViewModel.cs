@@ -98,6 +98,9 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private double angleZ;
 
+    [ObservableProperty]
+    private int rollResult;
+
     public Model3D DiceModel
     {
         get
@@ -116,8 +119,9 @@ public partial class MainWindowViewModel : ObservableObject
     [RelayCommand]
     private void RollDice()
     {
-        var rolledNumber = Random.Shared.Next(1, diceFacesNumberDictionary[this.SelectedDice]);
+        this.RollResult = Random.Shared.Next(1, diceFacesNumberDictionary[this.SelectedDice]);
         var diceFaceOrientation = diceModelFaceRotationsDictionary[this.SelectedDice][rolledNumber];
+            var diceFaceOrientation = diceModelFaceRotationsDictionary[this.SelectedDice][this.RollResult];
         var diceOrientationVariability = diceAngleVariability[this.SelectedDice];
 
         var diceRollStoryboard = (Storyboard)Application.Current.MainWindow.FindResource("DiceRollStoryboard");

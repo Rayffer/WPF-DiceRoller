@@ -132,6 +132,8 @@
                       ItemsSource="{Binding DiceTypes}"
                       VerticalContentAlignment="Center"
                       Margin="2" />
+            <Label Content="Roll result:" />
+            <Label Content="{Binding RollResult}" />
             <Button Content="Roll Dice"
                     Command="{Binding RollDiceCommand}"
                     HorizontalAlignment="Right"

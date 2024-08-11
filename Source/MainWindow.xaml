@@ -69,6 +69,7 @@
                                IsPanEnabled="False"
                                IsRotationEnabled="False"
                                IsZoomEnabled="False"
+                               Background="#FF545454"
                                ShowViewCube="False">
                 <!-- Camera Setup -->
                 <h:HelixViewport3D.Camera>

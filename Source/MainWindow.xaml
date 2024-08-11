@@ -11,6 +11,10 @@
         <main:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground"
+                    Value="AliceBlue" />
+        </Style>
         <!-- Define the Storyboard for dice rolling -->
         <Storyboard x:Key="DiceRollStoryboard"
                     AutoReverse="False">

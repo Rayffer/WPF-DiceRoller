@@ -2,9 +2,9 @@
 
 A tool to roll dice based in WPF.
 
-#### Sample roll result
-![imagen](https://github.com/user-attachments/assets/95f9dcec-9904-4ae4-b3df-543a87b55e99)
+#### Sample rolls with different dice:
 
+https://github.com/user-attachments/assets/f0fd71b7-ba5a-468a-8456-58dda284e1fe
 
 ## Attributions
 

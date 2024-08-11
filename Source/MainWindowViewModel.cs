@@ -43,12 +43,12 @@ public partial class MainWindowViewModel : ObservableObject
 
     private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d6FaceRotationsDictionary = new()
     {
-        { 1, (210, 40, 70) },
+        { 1, (35, 210, 0) },
         { 2, (-240, 170, -70) },
         { 3, (-50, 140, 50) },
         { 4, (135, -45, 45) },
         { 5, (-105, 140, -180) },
-        { 6, (-40, -45, -90) }
+        { 6, (-30, -20, -90) }
     };
 
     private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d8FaceRotationsDictionary = new()

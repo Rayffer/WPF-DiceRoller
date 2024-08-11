@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 
@@ -220,6 +221,23 @@ public partial class MainWindowViewModel : ObservableObject
         translate.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
             diceRollStoryboard.Begin();
         }
+
+    [RelayCommand]
+    private void MoveXAngle(MouseWheelEventArgs mousewheelMovement)
+    {
+        this.AngleX += mousewheelMovement.Delta > 0 ? 0.5 : -0.5;
+    }
+
+    [RelayCommand]
+    private void MoveYAngle(MouseWheelEventArgs mousewheelMovement)
+    {
+        this.AngleY += mousewheelMovement.Delta > 0 ? 0.5 : -0.5;
+    }
+
+    [RelayCommand]
+    private void MoveZAngle(MouseWheelEventArgs mousewheelMovement)
+    {
+        this.AngleZ += mousewheelMovement.Delta > 0 ? 0.5 : -0.5;
     }
 
     public MainWindowViewModel()

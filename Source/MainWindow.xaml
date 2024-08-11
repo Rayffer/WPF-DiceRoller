@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:h="http://helix-toolkit.org/wpf"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:main="clr-namespace:Rayfer.DiceRoller.WPF"
         Title="3D Dice Roll"
         Height="450"
@@ -67,6 +68,7 @@
             <h:HelixViewport3D IsManipulationEnabled="False"
                                IsPanEnabled="False"
                                IsRotationEnabled="False"
+                               IsZoomEnabled="False"
                                ShowViewCube="False">
                 <!-- Camera Setup -->
                 <h:HelixViewport3D.Camera>
@@ -168,13 +170,34 @@
                     Margin="18">
             <Label Content="Xº:" />
             <TextBox Text="{Binding AngleX, UpdateSourceTrigger=PropertyChanged}"
-                     Margin="5" />
+                     Margin="5">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseWheel">
+                        <i:InvokeCommandAction Command="{Binding MoveXAngleCommand}"
+                                               PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <Label Content="Yº:" />
             <TextBox Text="{Binding AngleY, UpdateSourceTrigger=PropertyChanged}"
-                     Margin="5" />
+                     Margin="5">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseWheel">
+                        <i:InvokeCommandAction Command="{Binding MoveYAngleCommand}"
+                                               PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <Label Content="Zº:" />
             <TextBox Text="{Binding AngleZ, UpdateSourceTrigger=PropertyChanged}"
-                     Margin="5" />
+                     Margin="5">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseWheel">
+                        <i:InvokeCommandAction Command="{Binding MoveZAngleCommand}"
+                                               PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <Label Content="Dice:" />
             
             <!-- Button to trigger dice roll -->

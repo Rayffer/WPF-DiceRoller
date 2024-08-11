@@ -16,32 +16,50 @@
             <!-- X-axis rotation -->
             <DoubleAnimation Storyboard.TargetName="RotateX"
                              Storyboard.TargetProperty="Angle"
-                             From="0"
-                             To="13"
-                             Duration="0:0:2"
                              DecelerationRatio="0.7" />
             <!-- Y-axis rotation -->
             <DoubleAnimation Storyboard.TargetName="RotateY"
                              Storyboard.TargetProperty="Angle"
-                             From="0"
-                             To="38"
-                             Duration="0:0:2"
                              DecelerationRatio="0.7" />
             <!-- Z-axis rotation -->
             <DoubleAnimation Storyboard.TargetName="RotateZ"
                              Storyboard.TargetProperty="Angle"
-                             From="0"
-                             To="0"
-                             Duration="0:0:2"
                              DecelerationRatio="0.7" />
-            <Point3DAnimation Storyboard.TargetName="DiceCamera"
-                              Storyboard.TargetProperty="Position"
-                              To="3,3,5">
-                <Point3DAnimation.EasingFunction>
+            <DoubleAnimation Storyboard.TargetName="Translate"
+                             Storyboard.TargetProperty="OffsetY"
+                             From="4"
+                             To="0"
+                             DecelerationRatio="0.7">
+                <DoubleAnimation.EasingFunction>
                     <BounceEase Bounces="7"
                                 Bounciness="10" />
-                </Point3DAnimation.EasingFunction>
-            </Point3DAnimation>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="D100DiceRollStoryboard"
+                    AutoReverse="False">
+            <!-- X-axis rotation -->
+            <DoubleAnimation Storyboard.TargetName="RotateXD100"
+                             Storyboard.TargetProperty="Angle"
+                             DecelerationRatio="0.7" />
+            <!-- Y-axis rotation -->
+            <DoubleAnimation Storyboard.TargetName="RotateYD100"
+                             Storyboard.TargetProperty="Angle"
+                             DecelerationRatio="0.7" />
+            <!-- Z-axis rotation -->
+            <DoubleAnimation Storyboard.TargetName="RotateZD100"
+                             Storyboard.TargetProperty="Angle"
+                             DecelerationRatio="0.7" />
+            <DoubleAnimation Storyboard.TargetName="TranslateD100"
+                             Storyboard.TargetProperty="OffsetY"
+                             From="4"
+                             To="0"
+                             DecelerationRatio="0.7">
+                <DoubleAnimation.EasingFunction>
+                    <BounceEase Bounces="7"
+                                Bounciness="10" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
     </Window.Resources>
     <Grid>
@@ -52,7 +70,7 @@
                                ShowViewCube="False">
                 <!-- Camera Setup -->
                 <h:HelixViewport3D.Camera>
-                    <PerspectiveCamera x:Name="DiceCamera" 
+                    <PerspectiveCamera x:Name="DiceCamera"
                                        Position="3,3,5"
                                        LookDirection="-3,-3,-5" />
                 </h:HelixViewport3D.Camera>
@@ -82,7 +100,7 @@
                 </ModelVisual3D>
                 <!-- Lighting Setup -->
                 <!-- Load and Display the 3D Model -->
-                <ModelVisual3D Content="{Binding Path=DiceModel}">
+                <ModelVisual3D Content="{Binding DiceModel}">
                     <ModelVisual3D.Transform>
                         <!-- Combine multiple rotations -->
                         <Transform3DGroup>
@@ -107,6 +125,38 @@
                                                          Angle="{Binding AngleZ}" />
                                 </RotateTransform3D.Rotation>
                             </RotateTransform3D>
+                            <TranslateTransform3D x:Name="Translate"
+                                                  OffsetX="{Binding OffsetX}"
+                                                  OffsetZ="{Binding OffsetZ}" />
+                        </Transform3DGroup>
+                    </ModelVisual3D.Transform>
+                </ModelVisual3D>
+                <ModelVisual3D Content="{Binding Path=DiceModelD100}">
+                    <ModelVisual3D.Transform>
+                        <!-- Combine multiple rotations -->
+                        <Transform3DGroup>
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D x:Name="RotateXD100"
+                                                         Axis="1,0,0"
+                                                         Angle="{Binding D100AngleX, UpdateSourceTrigger=PropertyChanged}" />
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D x:Name="RotateYD100"
+                                                         Axis="0,1,0"
+                                                         Angle="{Binding D100AngleY, UpdateSourceTrigger=PropertyChanged}" />
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D x:Name="RotateZD100"
+                                                         Axis="0,0,1"
+                                                         Angle="{Binding  D100AngleZ, UpdateSourceTrigger=PropertyChanged}" />
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+                            <TranslateTransform3D x:Name="TranslateD100" OffsetZ="{Binding D100OffsetX}" OffsetX="{Binding D100OffsetZ}"/>
                         </Transform3DGroup>
                     </ModelVisual3D.Transform>
                 </ModelVisual3D>

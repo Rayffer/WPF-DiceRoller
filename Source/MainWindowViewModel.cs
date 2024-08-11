@@ -23,6 +23,7 @@ public partial class MainWindowViewModel : ObservableObject
         { DiceFaces.D8, "Resources\\D8.obj" },
         { DiceFaces.D10, "Resources\\D10.obj" },
         { DiceFaces.D12, "Resources\\D12.obj" },
+        { DiceFaces.D20, "Resources\\D20.obj" },
         { DiceFaces.D100, "Resources\\D100.obj" },
     };
 
@@ -96,6 +97,30 @@ public partial class MainWindowViewModel : ObservableObject
         { 10, (168, 153, 148.5) },
         { 11, (151, 65, -56) },
         { 12, (179, 52, 88.5) },
+    };
+
+    private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d20FaceRotationsDictionary = new()
+    {
+        { 1, (84, 38.5, 36) },
+        { 2, (55.5, 160, 78) },
+        { 3, (-242.5, -18.5, 15) },
+        { 4, (124.5, 159, 133) },
+        { 5, (16, 27.5, -115) },
+        { 6, (-18, -25, 67.5) },
+        { 7, (91, 35, -32.5) },
+        { 8, (85.5, -140, -3) },
+        { 9, (-52.5, -102.5, -68.5) },
+        { 10, (14, -147, 48) },
+        { 11, (57.5, -16.5, 139.5) },
+        { 12, (56, 163, 6.5) },
+        { 13, (59.5, -19, -148) },
+        { 14, (-61, 20, 33.5) },
+        { 15, (93.5, 34, -103) },
+        { 16, (-89.5, -39, 71) },
+        { 17, (164.5, 31, 46.5) },
+        { 18, (109, 98.5, 161.5) },
+        { 19, (-54, -165.5, -100.5) },
+        { 20, (232.5, 16, -28.5) },
     };
 
     private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d100FaceRotationsDictionary = new()
@@ -222,22 +247,22 @@ public partial class MainWindowViewModel : ObservableObject
 
     private static void AnimateDice((double angleX, double angleY, double angleZ) faceOrientation, double orientationVariability, Storyboard diceRollStoryboard)
     {
-            var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
-            rotationX.From = Random.Shared.Next(-720, -270);
+        var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
+        rotationX.From = Random.Shared.Next(-720, -270);
         rotationX.To = faceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
-            rotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var rotationY = diceRollStoryboard.Children[1] as DoubleAnimation;
-            rotationY.From = Random.Shared.Next(-720, -270);
+        rotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
+        var rotationY = diceRollStoryboard.Children[1] as DoubleAnimation;
+        rotationY.From = Random.Shared.Next(-720, -270);
         rotationY.To = faceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
-            rotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var rotationZ = diceRollStoryboard.Children[2] as DoubleAnimation;
-            rotationZ.From = Random.Shared.Next(-720, -270);
+        rotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
+        var rotationZ = diceRollStoryboard.Children[2] as DoubleAnimation;
+        rotationZ.From = Random.Shared.Next(-720, -270);
         rotationZ.To = faceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
-            rotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
+        rotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
         var translate = diceRollStoryboard.Children[3] as DoubleAnimation;
         translate.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            diceRollStoryboard.Begin();
-        }
+        diceRollStoryboard.Begin();
+    }
 
     [RelayCommand]
     private void MoveXAngle(MouseWheelEventArgs mousewheelMovement)
@@ -260,13 +285,14 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel()
     {
         this.modelImporter = new ModelImporter();
-        this.diceTypes = 
+        this.diceTypes =
         [
-            DiceFaces.D4, 
-            DiceFaces.D6, 
-            DiceFaces.D8, 
-            DiceFaces.D10, 
-            DiceFaces.D12, 
+            DiceFaces.D4,
+            DiceFaces.D6,
+            DiceFaces.D8,
+            DiceFaces.D10,
+            DiceFaces.D12,
+            DiceFaces.D20,
             DiceFaces.D100
             ];
         this.SelectedDice = DiceFaces.D4;
@@ -277,6 +303,7 @@ public partial class MainWindowViewModel : ObservableObject
             {DiceFaces.D8, d8FaceRotationsDictionary },
             {DiceFaces.D10, d10FaceRotationsDictionary },
             {DiceFaces.D12, d12FaceRotationsDictionary },
+            {DiceFaces.D20, d20FaceRotationsDictionary },
             {DiceFaces.D100, d100FaceRotationsDictionary },
         };
     }

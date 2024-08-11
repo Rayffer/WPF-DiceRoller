@@ -33,6 +33,12 @@
     <None Update="Resources\D12.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\D20.mtl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\D20.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\D4.mtl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

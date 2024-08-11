@@ -59,4 +59,49 @@
     </None>
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="..\BlenderResources\d4_Base_color.png" Link="BlenderResources\d4_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d4_Normal_OpenGL.png" Link="BlenderResources\d4_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d6_Base_color.png" Link="BlenderResources\d6_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d6_Normal_OpenGL.png" Link="BlenderResources\d6_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d8_Base_color.png" Link="BlenderResources\d8_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d8_Normal_OpenGL.png" Link="BlenderResources\d8_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d10_Base_color.png" Link="BlenderResources\d10_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d10_Normal_OpenGL.png" Link="BlenderResources\d10_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d12_Base_color.png" Link="BlenderResources\d12_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d12_Normal_OpenGL.png" Link="BlenderResources\d12_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d20_Base_color.png" Link="BlenderResources\d20_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d20_Normal_OpenGL.png" Link="BlenderResources\d20_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d100_Base_color.png" Link="BlenderResources\d100_Base_color.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\BlenderResources\d100_Normal_OpenGL.png" Link="BlenderResources\d100_Normal_OpenGL.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
 </Project>

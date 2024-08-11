@@ -9,5 +9,5 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 d 1.000000
 illum 1
-map_Kd ../../../../../BlenderResources/d8_Base_color.png
-map_Bump -bm 1.000000 ../../../../../BlenderResources/d8_Normal_OpenGL.png
+map_Kd ../BlenderResources/d8_Base_color.png
+map_Bump -bm 1.000000 ../BlenderResources/d8_Normal_OpenGL.png

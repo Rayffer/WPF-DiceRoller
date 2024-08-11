@@ -248,15 +248,15 @@ public partial class MainWindowViewModel : ObservableObject
     private static void AnimateDice((double angleX, double angleY, double angleZ) faceOrientation, double orientationVariability, Storyboard diceRollStoryboard)
     {
         var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
-        rotationX.From = Random.Shared.Next(-720, -270);
+        rotationX.From = Random.Shared.Next(-720, -360);
         rotationX.To = faceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
         rotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
         var rotationY = diceRollStoryboard.Children[1] as DoubleAnimation;
-        rotationY.From = Random.Shared.Next(-720, -270);
+        rotationY.From = Random.Shared.Next(-720, -360);
         rotationY.To = faceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
         rotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
         var rotationZ = diceRollStoryboard.Children[2] as DoubleAnimation;
-        rotationZ.From = Random.Shared.Next(-720, -270);
+        rotationZ.From = Random.Shared.Next(-720, -360);
         rotationZ.To = faceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
         rotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
         var translate = diceRollStoryboard.Children[3] as DoubleAnimation;

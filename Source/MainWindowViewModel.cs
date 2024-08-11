@@ -185,38 +185,10 @@ public partial class MainWindowViewModel : ObservableObject
             var d100OrientationVariability = diceAngleVariability[DiceFaces.D100];
 
             var diceRollStoryboard = (Storyboard)Application.Current.MainWindow.FindResource("DiceRollStoryboard");
-            var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
-            rotationX.From = Random.Shared.Next(-720, -270);
-            rotationX.To = d10FaceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * d10OrientationVariability;
-            rotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var rotationY = diceRollStoryboard.Children[1] as DoubleAnimation;
-            rotationY.From = Random.Shared.Next(-720, -270);
-            rotationY.To = d10FaceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * d10OrientationVariability;
-            rotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var rotationZ = diceRollStoryboard.Children[2] as DoubleAnimation;
-            rotationZ.From = Random.Shared.Next(-720, -270);
-            rotationZ.To = d10FaceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * d10OrientationVariability;
-            rotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var translate = diceRollStoryboard.Children[3] as DoubleAnimation;
-            translate.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            diceRollStoryboard.Begin();
+            AnimateDice(d10FaceOrientation, d10OrientationVariability, diceRollStoryboard);
 
             var d100DiceRollStoryboard = (Storyboard)Application.Current.MainWindow.FindResource("D100DiceRollStoryboard");
-            var d100RotationX = d100DiceRollStoryboard.Children[0] as DoubleAnimation;
-            d100RotationX.From = Random.Shared.Next(-720, -270);
-            d100RotationX.To = d100FaceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * d100OrientationVariability;
-            d100RotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var d100RotationY = d100DiceRollStoryboard.Children[1] as DoubleAnimation;
-            d100RotationY.From = Random.Shared.Next(-720, -270);
-            d100RotationY.To = d100FaceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * d100OrientationVariability;
-            d100RotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var d100RotationZ = d100DiceRollStoryboard.Children[2] as DoubleAnimation;
-            d100RotationZ.From = Random.Shared.Next(-720, -270);
-            d100RotationZ.To = d100FaceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * d100OrientationVariability;
-            d100RotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            var translateD100 = d100DiceRollStoryboard.Children[3] as DoubleAnimation;
-            translateD100.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
-            d100DiceRollStoryboard.Begin();
+            AnimateDice(d100FaceOrientation, d100OrientationVariability, d100DiceRollStoryboard);
         }
         else
         {
@@ -226,18 +198,26 @@ public partial class MainWindowViewModel : ObservableObject
             var diceOrientationVariability = diceAngleVariability[this.SelectedDice];
 
             var diceRollStoryboard = (Storyboard)Application.Current.MainWindow.FindResource("DiceRollStoryboard");
+            AnimateDice(diceFaceOrientation, diceOrientationVariability, diceRollStoryboard);
+        }
+    }
+
+    private static void AnimateDice((double angleX, double angleY, double angleZ) faceOrientation, double orientationVariability, Storyboard diceRollStoryboard)
+    {
             var rotationX = diceRollStoryboard.Children[0] as DoubleAnimation;
             rotationX.From = Random.Shared.Next(-720, -270);
-            rotationX.To = diceFaceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * diceOrientationVariability;
+        rotationX.To = faceOrientation.angleX + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
             rotationX.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
             var rotationY = diceRollStoryboard.Children[1] as DoubleAnimation;
             rotationY.From = Random.Shared.Next(-720, -270);
-            rotationY.To = diceFaceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * diceOrientationVariability;
+        rotationY.To = faceOrientation.angleY + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
             rotationY.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
             var rotationZ = diceRollStoryboard.Children[2] as DoubleAnimation;
             rotationZ.From = Random.Shared.Next(-720, -270);
-            rotationZ.To = diceFaceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * diceOrientationVariability;
+        rotationZ.To = faceOrientation.angleZ + (Random.Shared.NextDouble() - 0.5D) * orientationVariability;
             rotationZ.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
+        var translate = diceRollStoryboard.Children[3] as DoubleAnimation;
+        translate.Duration = new Duration(TimeSpan.FromSeconds(1).Add(TimeSpan.FromSeconds(Random.Shared.NextDouble() * 0.75)));
             diceRollStoryboard.Begin();
         }
     }

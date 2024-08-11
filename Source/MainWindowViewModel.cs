@@ -22,6 +22,7 @@ public partial class MainWindowViewModel : ObservableObject
         { DiceFaces.D6, "Resources\\D6.obj" },
         { DiceFaces.D8, "Resources\\D8.obj" },
         { DiceFaces.D10, "Resources\\D10.obj" },
+        { DiceFaces.D12, "Resources\\D12.obj" },
         { DiceFaces.D100, "Resources\\D100.obj" },
     };
 
@@ -79,6 +80,22 @@ public partial class MainWindowViewModel : ObservableObject
         { 8, (0, -102, 0) },
         { 9, (-180, -125, 0) },
         { 10, (0, -175, 0) },
+    };
+
+    private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d12FaceRotationsDictionary = new()
+    {
+        { 1, (111, -165, 134) },
+        { 2, (-159, -167, -157) },
+        { 3, (170, -3.5, -30.5) },
+        { 4, (-21, -61, 97) },
+        { 5, (115, 162, 70) },
+        { 6, (104, -146, 20) },
+        { 7, (125, -24, 163) },
+        { 8, (-177, -26, 83) },
+        { 9, (100.5, 22, -149.5) },
+        { 10, (168, 153, 148.5) },
+        { 11, (151, 65, -56) },
+        { 12, (179, 52, 88.5) },
     };
 
     private readonly Dictionary<int, (double angleX, double angleY, double angleZ)> d100FaceRotationsDictionary = new()
@@ -243,7 +260,15 @@ public partial class MainWindowViewModel : ObservableObject
     public MainWindowViewModel()
     {
         this.modelImporter = new ModelImporter();
-        this.diceTypes = [DiceFaces.D4, DiceFaces.D6, DiceFaces.D8, DiceFaces.D10, DiceFaces.D100];
+        this.diceTypes = 
+        [
+            DiceFaces.D4, 
+            DiceFaces.D6, 
+            DiceFaces.D8, 
+            DiceFaces.D10, 
+            DiceFaces.D12, 
+            DiceFaces.D100
+            ];
         this.SelectedDice = DiceFaces.D4;
         this.diceModelFaceRotationsDictionary = new()
         {
@@ -251,6 +276,7 @@ public partial class MainWindowViewModel : ObservableObject
             {DiceFaces.D6, d6FaceRotationsDictionary },
             {DiceFaces.D8, d8FaceRotationsDictionary },
             {DiceFaces.D10, d10FaceRotationsDictionary },
+            {DiceFaces.D12, d12FaceRotationsDictionary },
             {DiceFaces.D100, d100FaceRotationsDictionary },
         };
     }
